@@ -3927,11 +3927,13 @@ textarea.form-control-lg {
   max-height: var(--bs-scroll-height, 75vh);
   overflow-y: auto;
 }
-
-@media (min-width: 576px) {
+@media (max-width: 769px) {
   .navbar{
     display:none!important;
   }
+}
+
+@media (min-width: 576px) {
   .navbar-expand-sm {
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -3979,9 +3981,6 @@ textarea.form-control-lg {
   }
 }
 @media (min-width: 768px) {
-  .navbar{
-    display:none!important;
-  }
   .navbar-expand-md {
     flex-wrap: nowrap;
     justify-content: flex-start;
