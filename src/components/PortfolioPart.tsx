@@ -10,6 +10,7 @@ import PortImage05 from "../assets/img/portfolio-05.png";
 import PortImage06 from "../assets/img/portfolio-06.png";
 import PortImage07 from "../assets/img/portfolio-07.png";
 import PortImage08 from "../assets/img/portfolio-08.png";
+import HellBent from "../assets/hellbent.pdf";
 
 function PortfolioPart() {
   return (
@@ -41,7 +42,7 @@ function PortfolioPart() {
           side="right"
           image={ProjImage02}
           title="HellBent"
-          link="./assets/hellbent.pdf"
+          link={HellBent}
         >
           HellBent is a modern take on the ten-sided tabletop roleplaying game,
           infusing new and unique elements into a system that has been around

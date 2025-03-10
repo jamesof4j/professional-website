@@ -1,3 +1,5 @@
+import Resume from "../assets/resume.pdf";
+
 function FooterPart() {
   return (
     <>
@@ -24,7 +26,7 @@ function FooterPart() {
         </div>
         <div className="container px-1 bg-black">
           <div className="text-center">
-            <a href="./assets/resume.pdf">
+            <a href={Resume}>
               <h1 className="DownloadFix">Download Resume</h1>
             </a>
           </div>
