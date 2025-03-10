@@ -3927,7 +3927,7 @@ textarea.form-control-lg {
   max-height: var(--bs-scroll-height, 75vh);
   overflow-y: auto;
 }
-@media (max-width: 769px) {
+@media (max-width: 993px) {
   .navbar{
     display:none!important;
   }
