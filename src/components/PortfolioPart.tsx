@@ -27,7 +27,7 @@ function PortfolioPart() {
           side="left"
           image={ProjImage01}
           title="PatientSpot"
-          link="https://www.paitentspot.org"
+          link="https://www.patientspot.org"
         >
           Developed from scratch, this Grade One medical device for mobile
           patient information documentation and medical survey participation is
@@ -41,7 +41,7 @@ function PortfolioPart() {
           side="right"
           image={ProjImage02}
           title="HellBent"
-          link="src/assets/hellbent.pdf"
+          link="./assets/hellbent.pdf"
         >
           HellBent is a modern take on the ten-sided tabletop roleplaying game,
           infusing new and unique elements into a system that has been around

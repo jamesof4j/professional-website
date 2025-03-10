@@ -24,7 +24,7 @@ function FooterPart() {
         </div>
         <div className="container px-1 bg-black">
           <div className="text-center">
-            <a href="src/assets/resume.pdf">
+            <a href="./assets/resume.pdf">
               <h1 className="DownloadFix">Download Resume</h1>
             </a>
           </div>
