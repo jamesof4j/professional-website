@@ -1,4 +1,5 @@
 import AboutImage from "../assets/img/phoneanddice.png";
+import Resume from "../assets/resume.pdf";
 
 function AboutPart() {
   return (
@@ -19,6 +20,13 @@ function AboutPart() {
               directing team members and peers to success, and I am dedicated to
               delivering high-quality work that meets the needs of my clients.
             </p>
+          </div>
+        </div>
+        <div className="container pb-4">
+          <div className="text-center">
+            <a href={Resume}>
+              <h1 className="DownloadFix">Download Resume</h1>
+            </a>
           </div>
         </div>
         <img className="img-fluid" src={AboutImage} alt="..." />
