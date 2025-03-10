@@ -3929,6 +3929,9 @@ textarea.form-control-lg {
 }
 
 @media (min-width: 576px) {
+  .navbar{
+    display:none!important;
+  }
   .navbar-expand-sm {
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -3976,6 +3979,9 @@ textarea.form-control-lg {
   }
 }
 @media (min-width: 768px) {
+  .navbar{
+    display:none!important;
+  }
   .navbar-expand-md {
     flex-wrap: nowrap;
     justify-content: flex-start;
