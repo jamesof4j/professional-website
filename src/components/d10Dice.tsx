@@ -1,7 +1,5 @@
 import d10svg from "../assets/img/d10.svg";
 
-import { ReactNode } from "react";
-
 interface Props {
   dicecolor?: string;
   dicenumber: number;
