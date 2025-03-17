@@ -23,7 +23,7 @@ const PortfolioPart = ({
             <img className="img-fluid" src={image} alt="..." />
           </div>
           <div className="col-lg-6">
-            <div className="bg-black text-center h-100 project">
+            <div className="bg-black text-center h-100 project ProjectHover">
               <div className="d-flex h-100">
                 <div className="project-text w-100 my-auto text-center text-lg-left">
                   <a
@@ -34,6 +34,7 @@ const PortfolioPart = ({
                   >
                     <h4 className="text-white">{title}</h4>
                     <p className="mb-0 text-white-50">{children}</p>
+                    <h5 className="pt-1">Click to learn more</h5>
                   </a>
                 </div>
               </div>
@@ -47,7 +48,7 @@ const PortfolioPart = ({
             <img className="img-fluid" src={image} alt="..." />
           </div>
           <div className="col-lg-6 order-lg-first">
-            <div className="bg-black text-center h-100 project">
+            <div className="bg-black text-center h-100 project ProjectHover">
               <div className="d-flex h-100">
                 <div className="project-text w-100 my-auto text-center text-lg-right">
                   <a
@@ -58,6 +59,7 @@ const PortfolioPart = ({
                   >
                     <h4 className="text-white">{title}</h4>
                     <p className="mb-0 text-white-50">{children}</p>
+                    <h5 className="pt-1">Click to learn more</h5>
                   </a>
                 </div>
               </div>

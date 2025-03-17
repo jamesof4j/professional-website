@@ -16,6 +16,7 @@ function PortfolioPart() {
   return (
     <section className="signup-section projects-section" id="signup projects">
       <div className="container px-4 px-lg-5">
+        <div className="row"></div>
         <div className="row gx-4 gx-lg-5" id="projects">
           <div className="text-center">
             <i className="fa fa-gamepad fa-2x mb-2 mx-2 text-white"></i>
