@@ -10,13 +10,12 @@ import PortImage05 from "../assets/img/portfolio-05.png";
 import PortImage06 from "../assets/img/portfolio-06.png";
 import PortImage07 from "../assets/img/portfolio-07.png";
 import PortImage08 from "../assets/img/portfolio-08.png";
-import HellBent from "../assets/hellbent.pdf";
+import { Link } from "react-router-dom";
 
 function PortfolioPart() {
   return (
     <section className="signup-section projects-section" id="signup projects">
       <div className="container px-4 px-lg-5">
-        <div className="row"></div>
         <div className="row gx-4 gx-lg-5" id="projects">
           <div className="text-center">
             <i className="fa fa-gamepad fa-2x mb-2 mx-2 text-white"></i>
@@ -39,19 +38,16 @@ function PortfolioPart() {
           and conditional logic to alter the user experience to specific needs.
         </PortItemPart>
 
-        <PortItemPart
-          side="right"
-          image={ProjImage02}
-          title="HellBent"
-          link={HellBent}
-        >
-          HellBent is a modern take on the ten-sided tabletop roleplaying game,
-          infusing new and unique elements into a system that has been around
-          for decades. Set in a contemporary setting, players and Game Masters
-          alike get the rare chance to incorporate present-day elements into
-          their fantasy. Choose from a variety of character classes that combine
-          modern battle tactics with occult magic, and explore a world that is
-          both familiar and strange.
+        <PortItemPart side="right" image={ProjImage02} title="HellBent">
+          <Link to="/hellbent" className="NoUnderline mb-0 text-white-50">
+            HellBent is a modern take on the ten-sided tabletop roleplaying
+            game, infusing new and unique elements into a system that has been
+            around for decades. Set in a contemporary setting, players and Game
+            Masters alike get the rare chance to incorporate present-day
+            elements into their fantasy. Choose from a variety of character
+            classes that combine modern battle tactics with occult magic, and
+            explore a world that is both familiar and strange.
+          </Link>
         </PortItemPart>
 
         <PortItemPart

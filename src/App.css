@@ -669,6 +669,7 @@ progress {
   .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
     max-width: 1320px;
   }
+  .HBcontainer{ max-width:1860px; }
 }
 .row {
   --bs-gutter-x: 1.5rem;
@@ -11080,6 +11081,9 @@ body {
   background-attachment: scroll;
   background-size: cover;
 }
+.HBmasthead{
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%), url("../src/assets/img/bg-hellbent.jpg");
+}
 .masthead h1, .masthead .h1 {
   font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 2.5rem;
@@ -11090,6 +11094,19 @@ body {
   -webkit-background-clip: text;
           background-clip: text;
 }
+.HBcontainer .row div h1{
+  font-size: 72px;
+  font-family: "pulpo-rust-50", "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-stretch: extra-condensed;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.9),
+    rgba(200, 20, 20, 0.4)
+    );
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+          background-clip: text;
+}
+
 .masthead h2, .masthead .h2 {
   max-width: 20rem;
   font-size: 1rem;
@@ -11185,6 +11202,15 @@ body {
   border: 0;
 }
 
+.hellbent-section {
+  padding: 5rem 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.5) 75%, #000 100%), url("../src/assets/img/bg-hellbent.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+}
+
 .contact-section {
   padding-top: 0.5rem;
 }
@@ -11250,9 +11276,37 @@ body {
   color: rgba(100, 161,157, var(--bs-text-opacity)) !important;
 }
 
+.text-red {
+  --bs-text-opacity: 1;
+  color: rgba(200, 20, 20, var(--bs-text-opacity)) !important;
+}
+
+.HBnavHead{
+  text-align: center;
+}
+
+.HBcontainer div > *{
+  color:#fff;
+}
+
 .dice-number{
   position:relative;
-  
+  color:#fff;
+  margin: 0 auto;
+  text-align: center;
+  height:0px;
+}
+.col-lg-1 .dice-number{
+  top: -75%;
+  font-size: 1.5rem;
+}
+.col-lg-2 .dice-number{
+  top: -75%;
+  font-size: 3rem;
+}
+.col-lg-3 .dice-number{
+  top: -75%;
+  font-size: 4.5rem;
 }
 
 .dice-white{
