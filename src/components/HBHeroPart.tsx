@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import HBbook1 from "../assets/hellbent_1_03.pdf";
 import HBbook2 from "../assets/hellbent_2_01.pdf";
 import HBbook3 from "../assets/hellbent_3_01.pdf";
@@ -28,17 +28,17 @@ function HBHeroPart() {
   let Successes = 0;
   let BonusDiceToRoll = 0;
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDiceRoll(event.target.value);
   };
 
-  const countOccurrences = (array, value) => {
+  const countOccurrences = <T,>(array: T[], value: T): number => {
     return array.reduce((count, element) => {
       return element === value ? count + 1 : count;
     }, 0);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("------------------------");
     console.log("Input Value:", diceRoll);
@@ -114,13 +114,13 @@ function HBHeroPart() {
   };
 
   const RollTheDice = (
-    Quantity,
-    Difficulty,
-    NumberToBonus,
-    NumberToRemove,
-    BonusNumber,
-    No1Number,
-    BonusRoll
+    Quantity: number,
+    Difficulty: number,
+    NumberToBonus: number,
+    NumberToRemove: number,
+    BonusNumber: number,
+    No1Number: boolean,
+    BonusRoll: boolean
   ) => {
     BonusDiceToRoll = 0; // Reset BonusDiceToRoll for each roll
     for (let i = 0; i < Quantity; i++) {
@@ -314,7 +314,9 @@ function HBHeroPart() {
                   remove Successes.
                 </li>
               </ul>
-              <p>(This feature is presently non-functional)</p>
+              <p>
+                (This feature is presently only functional in the Console Log)
+              </p>
             </div>
           </div>
         </div>
