@@ -11288,7 +11288,41 @@ body {
 .HBcontainer div > *{
   color:#fff;
 }
-
+.DiceArea{
+  position:relative;
+  margin:15px auto;
+  width:90%;
+  min-height:150px;
+  border: 2px solid #a00;
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: #000 0px 0px 10px;
+  border-radius: 10px;
+}
+.DiceInput, .DiceInput:focus{
+  position:relative;
+  margin:0 auto 10px;
+  width:90%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border: 2px solid #aaa;
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: #000 0px 0px 10px;
+  color:#fff
+}
+.CodeExplanation{
+  margin:15px auto;
+  width:90%;
+  background: rgba(0, 0, 0, 0.85);
+  box-shadow: #000 0px 0px 10px;
+}
+.CodeExplanation p, .CodeExplanation ul li{
+  color:#fff;
+  font-weight:100;
+}
+.CodeExplanation p b{
+  font-weight:700;
+}
 .dice-number{
   position:relative;
   color:#fff;
