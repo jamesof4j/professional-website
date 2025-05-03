@@ -4,10 +4,10 @@ import HBbook2 from "../assets/hellbent_2_01.pdf";
 import HBbook3 from "../assets/hellbent_3_01.pdf";
 
 function HBHeroPart() {
+  window.scrollTo(0, 0);
   const [HB1visible, setHB1Visible] = useState(false);
   const [HB2visible, setHB2Visible] = useState(false);
   const [HB3visible, setHB3Visible] = useState(true);
-  window.scrollTo(0, 0);
   const Click1 = () => {
     setHB1Visible(true);
     setHB2Visible(false);
@@ -23,6 +23,155 @@ function HBHeroPart() {
     setHB2Visible(false);
     setHB3Visible(true);
   };
+
+  const [diceRoll, setDiceRoll] = useState("");
+  let Successes = 0;
+  let BonusDiceToRoll = 0;
+
+  const handleChange = (event) => {
+    setDiceRoll(event.target.value);
+  };
+
+  const countOccurrences = (array, value) => {
+    return array.reduce((count, element) => {
+      return element === value ? count + 1 : count;
+    }, 0);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("------------------------");
+    console.log("Input Value:", diceRoll);
+    // Validate the input format (e.g., "XdY" where X and Y are numbers)
+    const regex = /^\d+d\d+([ADBN]*)$/; // Regex to match the format "XdY" with optional parameters
+    if (!regex.test(diceRoll)) {
+      console.error(
+        "Invalid input format. Please use '#d#' format and adhere to available parameters."
+      );
+      setDiceRoll(""); // Clear the input field after submit
+      console.log("------------------------");
+      return;
+    }
+    // Check to see if there are any parameters after the second number
+    const params = diceRoll
+      .split(/d|(?=\D)/)
+      .slice(2)
+      .join("");
+    const paramsArray = [...params];
+    console.log("Parameters:", paramsArray);
+
+    const Quantity = parseInt(diceRoll.split("d")[0]);
+    const Difficulty = parseInt(diceRoll.split("d")[1].split(/A|D|B|N/)[0]);
+    if (Difficulty > 10 || Difficulty < 6) {
+      console.error("Difficulty must be between 6 and 10.");
+      setDiceRoll(""); // Clear the input field after submit
+      console.log("------------------------");
+      return;
+    }
+    console.log("Number of Dice to roll:", Quantity);
+    console.log("Difficulty of roll:", Difficulty);
+    let NumberToBonus = 10;
+    let NumberToRemove = 1;
+    // Check for parameters and apply them accordingly
+    let AdvNumber = countOccurrences(paramsArray, "A");
+    let DisNumber = countOccurrences(paramsArray, "D");
+    const BonusNumber = countOccurrences(paramsArray, "B");
+    const No1Number = countOccurrences(paramsArray, "N") ? true : false;
+    if (AdvNumber > 3) {
+      AdvNumber = 3;
+    }
+    if (DisNumber > 3) {
+      DisNumber = 3;
+    }
+    console.log("Advantage Level:", AdvNumber);
+    console.log("Disadvantage Level:", DisNumber);
+    console.log("Extra Bonus Dice on Crit:", BonusNumber);
+    console.log("No 1's when no DisAdv:", No1Number);
+    // Apply Advantage and Disadvantage
+    for (let i = 0; i < AdvNumber; i++) {
+      NumberToBonus -= 1;
+    }
+    for (let i = 0; i < DisNumber; i++) {
+      NumberToRemove += 1;
+    }
+    console.log("Number needed to score Bonus Die:", NumberToBonus);
+    console.log("Number needed to remove Success:", NumberToRemove);
+
+    RollTheDice(
+      Quantity,
+      Difficulty,
+      NumberToBonus,
+      NumberToRemove,
+      BonusNumber,
+      No1Number,
+      false
+    );
+
+    console.log("=== Final Successes:", Successes, "===");
+
+    setDiceRoll(""); // Clear the input field after submit
+    console.log("------------------------");
+  };
+
+  const RollTheDice = (
+    Quantity,
+    Difficulty,
+    NumberToBonus,
+    NumberToRemove,
+    BonusNumber,
+    No1Number,
+    BonusRoll
+  ) => {
+    BonusDiceToRoll = 0; // Reset BonusDiceToRoll for each roll
+    for (let i = 0; i < Quantity; i++) {
+      // Actually roll the dice
+      let randomNumber: number = Math.floor(Math.random() * 10) + 1; // Random number between 1 and 10
+      console.log(
+        "Die #",
+        i + 1,
+        " = ",
+        randomNumber,
+        randomNumber >= Difficulty ? "!" : "",
+        randomNumber >= NumberToBonus ? "!!!" : "",
+        ((No1Number === false && randomNumber <= NumberToRemove) ||
+          (No1Number === true && randomNumber <= NumberToRemove - 1)) &&
+          BonusRoll === false
+          ? "..."
+          : ""
+      );
+      if (randomNumber >= Difficulty) {
+        Successes += 1;
+      }
+      if (
+        ((No1Number === false && randomNumber <= NumberToRemove) ||
+          (No1Number === true && randomNumber <= NumberToRemove - 1)) &&
+        BonusRoll === false
+      ) {
+        Successes -= 1;
+      }
+      if (randomNumber >= NumberToBonus) {
+        BonusDiceToRoll += BonusNumber + 1;
+      }
+    }
+    console.log("Successes:", Successes);
+    console.log("Bonus Dice to roll:", BonusDiceToRoll);
+    if (BonusDiceToRoll > 0) {
+      console.log("Rolling Bonus Dice...");
+      RollTheDice(
+        BonusDiceToRoll,
+        Difficulty,
+        NumberToBonus,
+        NumberToRemove,
+        BonusNumber,
+        No1Number,
+        true
+      );
+    } else {
+      console.log("No Bonus Dice to roll.");
+    }
+    return Successes;
+  };
+
   return (
     <section className="hellbent-section projects-section" id="signup projects">
       <div className="container HBcontainer px-4 px-lg-5">
@@ -101,12 +250,18 @@ function HBHeroPart() {
             <div className="text-center">
               <p>Dice Roller</p>
               <div className="DiceArea"></div>
-              <input
-                className="form-control DiceInput"
-                type="text"
-                placeholder="Enter your rolling code here"
-              />
-              <a className="btn btn-dark">Roll Dice</a>
+              <form onSubmit={handleSubmit}>
+                <input
+                  className="form-control DiceInput"
+                  type="text"
+                  placeholder="Enter your rolling code here"
+                  value={diceRoll}
+                  onChange={handleChange}
+                />
+                <button className="btn btn-dark" type="submit">
+                  Roll Dice
+                </button>
+              </form>
             </div>
             <div className="CodeExplanation">
               <p>
@@ -114,9 +269,12 @@ function HBHeroPart() {
                 included after the second number.
               </p>
               <p>
-                The first number is the number is the number of dice to roll.
+                The first number is the number of dice to roll. Must be above 1.
               </p>
-              <p>The second number is the difficulty set for the roll.</p>
+              <p>
+                The second number is the difficulty set for the roll. Must be
+                6-10.
+              </p>
               <p>The parameters can be any of the following:</p>
               <ul>
                 <li>
@@ -131,7 +289,8 @@ function HBHeroPart() {
                 </li>
                 <li>
                   An N will make it so 1's do not remove successes when no
-                  Disadvantage is imposed
+                  Disadvantage is imposed, or reduce the overall Disadvantage
+                  level by one.
                 </li>
               </ul>
               <p>
@@ -140,11 +299,10 @@ function HBHeroPart() {
               <ul>
                 <li>5d7: Rolls five dice at a Difficulty of 7</li>
                 <li>
-                  3d10A: Rolls three dice at a Difficulty of 10 with one level
-                  of Advantage
+                  3d10A: Rolls three dice at a Difficulty of 10 with Advantage
                 </li>
                 <li>
-                  2d8D: Rolls two dice at a Difficulty of 8 with one level of
+                  2d8DD: Rolls two dice at a Difficulty of 8 with double
                   Disadvantage
                 </li>
                 <li>
