@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import d10svg from "../assets/img/d10.svg";
 import HBbook1 from "../assets/hellbent_1_03.pdf";
 import HBbook2 from "../assets/hellbent_2_01.pdf";
@@ -6,9 +6,7 @@ import HBbook3 from "../assets/hellbent_3_01.pdf";
 
 function HBHeroPart() {
   document.title = "HellBent - A Modern Occult D10 Roleplaying Game";
-  document.onload = function () {
-    window.scrollTo(0, 0);
-  };
+  window.scrollTo(0, 0);
 
   const [HB1visible, setHB1Visible] = useState(false);
   const [HB2visible, setHB2Visible] = useState(false);
@@ -33,6 +31,8 @@ function HBHeroPart() {
 
   const [DiceArray, setDiceArray] = useState<React.ReactElement[]>([]);
 
+  const [successesDisplay, setsuccessesDisplay] = useState("");
+
   let Successes = 0;
   let BonusDiceToRoll = 0;
 
@@ -53,6 +53,7 @@ function HBHeroPart() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setDiceArray([]);
+    setsuccessesDisplay("");
     await timeout(10); //for 0.01 sec delay
     console.log("------------------------");
     console.log("Input Value:", diceRoll);
@@ -122,7 +123,7 @@ function HBHeroPart() {
     );
 
     console.log("=== Final Successes:", Successes, "===");
-
+    setsuccessesDisplay("Successes: " + Successes);
     setDiceRoll(""); // Clear the input field after submit
     console.log("------------------------");
   };
@@ -185,7 +186,6 @@ function HBHeroPart() {
     }
     console.log("Successes:", Successes);
     console.log("Bonus Dice to roll:", BonusDiceToRoll);
-    await timeout(750); //for 0.75 sec delay
     if (BonusDiceToRoll > 0) {
       console.log("Rolling Bonus Dice...");
       RollTheDice(
@@ -285,6 +285,9 @@ function HBHeroPart() {
                   {DiceArray.map((dice, index) => (
                     <React.Fragment key={index}>{dice}</React.Fragment>
                   ))}
+                </div>
+                <div className="row justify-content-center">
+                  <h2>{successesDisplay}</h2>
                 </div>
               </div>
               <form onSubmit={handleSubmit}>
