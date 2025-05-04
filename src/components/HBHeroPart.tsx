@@ -63,6 +63,9 @@ function HBHeroPart() {
       console.error(
         "Invalid input format. Please use '#d#' format and adhere to available parameters."
       );
+      alert(
+        "Invalid input format. Please use '#d#' format and adhere to available parameters."
+      );
       setDiceRoll(""); // Clear the input field after submit
       console.log("------------------------");
       return;
@@ -79,12 +82,20 @@ function HBHeroPart() {
     const Difficulty = parseInt(diceRoll.split("d")[1].split(/A|D|B|N/)[0]);
     if (Difficulty > 10 || Difficulty < 6) {
       console.error("Difficulty must be between 6 and 10.");
+      alert("Difficulty must be between 6 and 10.");
       setDiceRoll(""); // Clear the input field after submit
       console.log("------------------------");
       return;
     }
     console.log("Number of Dice to roll:", Quantity);
     console.log("Difficulty of roll:", Difficulty);
+    if (Quantity > 30) {
+      console.error("Maximum number of dice allowed is 30.");
+      alert("Maximum number of dice allowed is 30.");
+      setDiceRoll(""); // Clear the input field after submit
+      console.log("------------------------");
+      return;
+    }
     let NumberToBonus = 10;
     let NumberToRemove = 1;
     // Check for parameters and apply them accordingly
@@ -121,11 +132,7 @@ function HBHeroPart() {
       No1Number,
       false
     );
-
-    console.log("=== Final Successes:", Successes, "===");
-    setsuccessesDisplay("Successes: " + Successes);
-    setDiceRoll(""); // Clear the input field after submit
-    console.log("------------------------");
+    return;
   };
 
   const RollTheDice = async (
@@ -154,8 +161,14 @@ function HBHeroPart() {
           ? "..."
           : ""
       );
+      let dicenumbercolor = "";
+      let dicefacecolor = "dice-red"; // Default color for the die face
+      if (BonusRoll === true) {
+        dicefacecolor = "dice-white";
+      }
       if (randomNumber >= Difficulty) {
         Successes += 1;
+        dicenumbercolor = "dice-success";
       }
       if (
         ((No1Number === false && randomNumber <= NumberToRemove) ||
@@ -163,9 +176,11 @@ function HBHeroPart() {
         BonusRoll === false
       ) {
         Successes -= 1;
+        dicenumbercolor = "dice-failure";
       }
       if (randomNumber >= NumberToBonus) {
         BonusDiceToRoll += BonusNumber + 1;
+        dicenumbercolor = "dice-crit-success";
       }
       // Add the dice to the layout
       setDiceArray((prevDiceArray) => [
@@ -179,15 +194,16 @@ function HBHeroPart() {
             animation: "fadeInFromBottom 0.35s ease-in forwards",
           }}
         >
-          <img src={d10svg} className="dicesvg dice-white" />
-          <div className="dice-number">{randomNumber}</div>
+          <img src={d10svg} className={"dicesvg " + dicefacecolor} />
+          <div className={"dice-number " + dicenumbercolor}>{randomNumber}</div>
         </div>,
       ]);
     }
     console.log("Successes:", Successes);
     console.log("Bonus Dice to roll:", BonusDiceToRoll);
-    if (BonusDiceToRoll > 0) {
+    if (BonusDiceToRoll > 0 && Successes < 51) {
       console.log("Rolling Bonus Dice...");
+      await timeout(750);
       RollTheDice(
         BonusDiceToRoll,
         Difficulty,
@@ -197,10 +213,20 @@ function HBHeroPart() {
         No1Number,
         true
       );
+    } else if (Successes >= 51) {
+      await timeout(750);
+      console.log("Successes capped at 50.");
+      setsuccessesDisplay("Successes: 50+");
+      setDiceRoll(""); // Clear the input field after submit
+      console.log("------------------------");
     } else {
+      await timeout(750);
       console.log("No Bonus Dice to roll.");
+      console.log("=== Final Successes:", Successes, "===");
+      setsuccessesDisplay("Successes: " + Successes);
+      setDiceRoll(""); // Clear the input field after submit
+      console.log("------------------------");
     }
-    return Successes;
   };
 
   return (
@@ -318,14 +344,17 @@ function HBHeroPart() {
               <p>The parameters can be any of the following:</p>
               <ul>
                 <li>
-                  An A will add one level of Advantage, up to three can be added
+                  An A will add one level of Advantage, which increases the
+                  possibility of getting Bonus Dice. Up to three can be added.
                 </li>
                 <li>
-                  A D will add one level of Disadvantage, up to three can be
-                  added
+                  A D will add one level of Disadvantage, which increases the
+                  possibility of successes being removed from your total. Up to
+                  three can be added.
                 </li>
                 <li>
-                  A B will add an additional Bonus Die whenever one is offered
+                  A B will add an additional Bonus Die whenever one is normally
+                  offered.
                 </li>
                 <li>
                   An N will make it so 1's do not remove successes when no
@@ -352,6 +381,11 @@ function HBHeroPart() {
                 <li>
                   5d7N: Rolls five dice at a Difficulty of 7. 1's will not
                   remove Successes.
+                </li>
+                <li>
+                  10d6AAABBN: Rolls ten dice at a Difficulty of 6 with triple
+                  Advantage. 7's, 8's, 9's, and 10's will grant three Bonus
+                  Dice, and 1's will not remove Successes.
                 </li>
               </ul>
             </div>
