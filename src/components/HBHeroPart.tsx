@@ -3,11 +3,10 @@ import d10svg from "../assets/img/d10.svg";
 import HBbook1 from "../assets/hellbent_1_03.pdf";
 import HBbook2 from "../assets/hellbent_2_01.pdf";
 import HBbook3 from "../assets/hellbent_3_01.pdf";
-
-function HBHeroPart() {
+document.onload = function () {
   document.title = "HellBent - A Modern Occult D10 Roleplaying Game";
-  window.scrollTo(0, 0);
-
+};
+function HBHeroPart() {
   const [HB1visible, setHB1Visible] = useState(false);
   const [HB2visible, setHB2Visible] = useState(false);
   const [HB3visible, setHB3Visible] = useState(true);

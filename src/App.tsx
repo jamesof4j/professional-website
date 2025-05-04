@@ -1,4 +1,5 @@
 import "./App.css";
+import ScrollToTop from "./components/ScrollToTop";
 import NavigationPart from "./components/NavigationPart.tsx";
 import HeroPart from "./components/HomePart.tsx";
 import AboutPart from "./components/AboutPart.tsx";
@@ -13,6 +14,7 @@ function App() {
       <AboutPart />
       <PortfolioPart />
       <FooterPart />
+      <ScrollToTop />
     </div>
   );
 }
