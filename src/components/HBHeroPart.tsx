@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import d10svg from "../assets/img/d10.svg";
 import HBbook1 from "../assets/hellbent_1_03.pdf";
 import HBbook2 from "../assets/hellbent_2_01.pdf";
