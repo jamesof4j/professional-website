@@ -11297,6 +11297,7 @@ body {
   background: rgba(0, 0, 0, 0.5);
   box-shadow: #000 0px 0px 10px;
   border-radius: 10px;
+  padding:15px;
 }
 .DiceInput, .DiceInput:focus{
   position:relative;
@@ -11312,6 +11313,7 @@ body {
 }
 .CodeExplanation{
   margin:15px auto;
+  padding:10px; 
   width:90%;
   background: rgba(0, 0, 0, 0.85);
   box-shadow: #000 0px 0px 10px;
@@ -11323,24 +11325,57 @@ body {
 .CodeExplanation p b{
   font-weight:700;
 }
+.dicesvg{
+  z-index:1;
+}
 .dice-number{
-  position:relative;
+  z-index:2;
+  position:absolute;;
   color:#fff;
   margin: 0 auto;
   text-align: center;
-  height:0px;
+  top: 25%;
+  width:100%;
+  font-size: 37px;
 }
-.col-lg-1 .dice-number{
-  top: -75%;
-  font-size: 1.5rem;
+@media (max-width: 1860px) {
+  .dice-number{
+    font-size: 2vw;
+  }
 }
-.col-lg-2 .dice-number{
-  top: -75%;
-  font-size: 3rem;
+@media (max-width: 1400px) {
+  .dice-number{
+    font-size: 18px;
+  }
 }
-.col-lg-3 .dice-number{
-  top: -75%;
-  font-size: 4.5rem;
+@media (max-width: 1200px) {
+  .dice-number{
+    font-size: 15px;
+  }
+}
+@media (max-width: 992px) {
+  .dice-number{
+    font-size: 24px;
+  }
+}
+@media (max-width: 768px) {
+  .dice-number{
+    font-size: 18px;
+  }
+  .dice-col{
+    width:16.777%!important;
+  }
+}
+@media (max-width: 576px) {
+  .dice-number{
+    font-size: 3vw;
+  }
+}
+
+.dice-col{
+  display:inline-block;
+  position:relative;
+  padding:0;
 }
 
 .dice-white{
@@ -11363,4 +11398,21 @@ body {
 }
 .dice-brown{
   filter: invert(18%) sepia(39%) saturate(2801%) hue-rotate(23deg) brightness(92%) contrast(84%);
+}
+
+.fade-in-from-bottom {
+  transform: translateY(5%);
+  opacity: 0;
+  animation: fadeInFromBottom 0.35s ease-in forwards; /* Adjust duration and easing as needed */
+}
+
+@keyframes fadeInFromBottom {
+  from {
+    transform: translateY(5%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
 }

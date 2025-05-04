@@ -2,15 +2,18 @@ import d10svg from "../assets/img/d10.svg";
 
 interface Props {
   dicecolor?: string;
-  dicenumber?: string;
+  dicenumber?: number;
 }
 
-const D10Dice = ({ dicecolor = "dice-white", dicenumber = "" }: Props) => {
+const d10Dice = ({ dicecolor, dicenumber }: Props) => {
   return (
     <>
-      <img src={d10svg} className={dicecolor} />
-      <p className="dice-number">{dicenumber}</p>
+      <div className="col-lg-2">
+        <img src={d10svg} className={dicecolor} />
+        <p className="dice-number">{dicenumber}</p>
+      </div>
     </>
   );
 };
-export default D10Dice;
+
+export default d10Dice;

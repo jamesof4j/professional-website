@@ -1,10 +1,15 @@
 import React, { useState } from "react";
+import d10svg from "../assets/img/d10.svg";
 import HBbook1 from "../assets/hellbent_1_03.pdf";
 import HBbook2 from "../assets/hellbent_2_01.pdf";
 import HBbook3 from "../assets/hellbent_3_01.pdf";
 
 function HBHeroPart() {
-  window.scrollTo(0, 0);
+  document.title = "HellBent - A Modern Occult D10 Roleplaying Game";
+  document.onload = function () {
+    window.scrollTo(0, 0);
+  };
+
   const [HB1visible, setHB1Visible] = useState(false);
   const [HB2visible, setHB2Visible] = useState(false);
   const [HB3visible, setHB3Visible] = useState(true);
@@ -25,8 +30,15 @@ function HBHeroPart() {
   };
 
   const [diceRoll, setDiceRoll] = useState("");
+
+  const [DiceArray, setDiceArray] = useState<React.ReactElement[]>([]);
+
   let Successes = 0;
   let BonusDiceToRoll = 0;
+
+  function timeout(delay: number) {
+    return new Promise((res) => setTimeout(res, delay));
+  }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDiceRoll(event.target.value);
@@ -38,8 +50,10 @@ function HBHeroPart() {
     }, 0);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setDiceArray([]);
+    await timeout(10); //for 0.01 sec delay
     console.log("------------------------");
     console.log("Input Value:", diceRoll);
     // Validate the input format (e.g., "XdY" where X and Y are numbers)
@@ -113,7 +127,7 @@ function HBHeroPart() {
     console.log("------------------------");
   };
 
-  const RollTheDice = (
+  const RollTheDice = async (
     Quantity: number,
     Difficulty: number,
     NumberToBonus: number,
@@ -152,9 +166,26 @@ function HBHeroPart() {
       if (randomNumber >= NumberToBonus) {
         BonusDiceToRoll += BonusNumber + 1;
       }
+      // Add the dice to the layout
+      setDiceArray((prevDiceArray) => [
+        ...prevDiceArray,
+        <div
+          className="col-md-2 dice-col"
+          key={i}
+          style={{
+            transform: "translateY(5%)",
+            opacity: 0,
+            animation: "fadeInFromBottom 0.35s ease-in forwards",
+          }}
+        >
+          <img src={d10svg} className="dicesvg dice-white" />
+          <div className="dice-number">{randomNumber}</div>
+        </div>,
+      ]);
     }
     console.log("Successes:", Successes);
     console.log("Bonus Dice to roll:", BonusDiceToRoll);
+    await timeout(750); //for 0.75 sec delay
     if (BonusDiceToRoll > 0) {
       console.log("Rolling Bonus Dice...");
       RollTheDice(
@@ -249,7 +280,13 @@ function HBHeroPart() {
           <div className="col-lg-6">
             <div className="text-center">
               <p>Dice Roller</p>
-              <div className="DiceArea"></div>
+              <div id="DiceArea" className="DiceArea">
+                <div className="row justify-content-center">
+                  {DiceArray.map((dice, index) => (
+                    <React.Fragment key={index}>{dice}</React.Fragment>
+                  ))}
+                </div>
+              </div>
               <form onSubmit={handleSubmit}>
                 <input
                   className="form-control DiceInput"
@@ -314,9 +351,6 @@ function HBHeroPart() {
                   remove Successes.
                 </li>
               </ul>
-              <p>
-                (This feature is presently only functional in the Console Log)
-              </p>
             </div>
           </div>
         </div>
