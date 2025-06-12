@@ -3,27 +3,38 @@ import d10svg from "../assets/img/d10.svg";
 import HBbook1 from "../assets/hellbent_1_03.pdf";
 import HBbook2 from "../assets/hellbent_2_01.pdf";
 import HBbook3 from "../assets/hellbent_3_01.pdf";
+import HBbook3_2 from "../assets/hellbent_3_02.pdf";
 document.onload = function () {
   document.title = "HellBent - A Modern Occult D10 Roleplaying Game";
 };
 function HBHeroPart() {
   const [HB1visible, setHB1Visible] = useState(false);
   const [HB2visible, setHB2Visible] = useState(false);
-  const [HB3visible, setHB3Visible] = useState(true);
+  const [HB3visible, setHB3Visible] = useState(false);
+  const [HB3_2visible, setHB3_2Visible] = useState(true);
   const Click1 = () => {
     setHB1Visible(true);
     setHB2Visible(false);
     setHB3Visible(false);
+    setHB3_2Visible(false);
   };
   const Click2 = () => {
     setHB1Visible(false);
     setHB2Visible(true);
     setHB3Visible(false);
+    setHB3_2Visible(false);
   };
   const Click3 = () => {
     setHB1Visible(false);
     setHB2Visible(false);
     setHB3Visible(true);
+    setHB3_2Visible(false);
+  };
+  const Click3_2 = () => {
+    setHB1Visible(false);
+    setHB2Visible(false);
+    setHB3Visible(false);
+    setHB3_2Visible(true);
   };
 
   const [diceRoll, setDiceRoll] = useState("");
@@ -244,6 +255,12 @@ function HBHeroPart() {
             <div className="text-center">
               <p>Select your version below:</p>
               <a
+                className={HB3_2visible ? "btn btn-danger" : "btn btn-dark"}
+                onClick={Click3_2}
+              >
+                V3.2
+              </a>
+              <a
                 className={HB3visible ? "btn btn-danger" : "btn btn-dark"}
                 onClick={Click3}
               >
@@ -261,6 +278,19 @@ function HBHeroPart() {
               >
                 V1.3
               </a>
+              {HB3_2visible && (
+                <object
+                  data={HBbook3_2}
+                  type="application/pdf"
+                  width="100%"
+                  height="1000px"
+                >
+                  <p>
+                    Your browser doesn't support PDFs. Please download the PDF:{" "}
+                    <a href={HBbook3_2}>Download PDF</a>
+                  </p>
+                </object>
+              )}
               {HB3visible && (
                 <object
                   data={HBbook3}
