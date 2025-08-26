@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 function NavigationPart() {
   return (
     <>
@@ -5,6 +6,9 @@ function NavigationPart() {
         className="navbar navbar-expand-lg navbar-light fixed-top"
         id="mainNav"
       >
+        <Link to="/prunella">
+          <i className="fa fa-cat fa-2x mb-2 mx-2 PrunellaLinkFix"></i>
+        </Link>
         <div className="container px-4 px-lg-5">
           <a className="navbar-brand" href="#page-top">
             James R Dybisz

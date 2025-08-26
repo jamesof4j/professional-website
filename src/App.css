@@ -1,4 +1,7 @@
 @charset "UTF-8";
+@import url('https://cdn.jsdelivr.net/npm/lightgallery@2.4.0/css/lightgallery.css');
+@import url('https://cdn.jsdelivr.net/npm/lightgallery@2.4.0/css/lg-zoom.css');
+@import url('https://cdn.jsdelivr.net/npm/lightgallery@2.4.0/css/lg-video.css');
 /*!
 * Start Bootstrap - Grayscale v7.0.6 (https://startbootstrap.com/theme/grayscale)
 * Copyright 2013-2023 Start Bootstrap
@@ -11084,12 +11087,53 @@ body {
 .HBmasthead{
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%), url("../src/assets/img/bg-hellbent.jpg");
 }
+.PRUmasthead{
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 75%, #000 100%), url("../src/assets/img/bg-prunella.jpg");
+  background-size: cover;
+  background-position:center;
+}
+.PruJustify{
+      top: -10em;
+    position: relative;
+}
+.PrunellaLinkFix{
+  color:rgba(0, 0, 0, 0.3);
+  :hover{
+    color:rgba(0, 100, 0, 0.6);
+  }
+}
+.masonry-grid {
+  display: flex;
+  margin-left: -16px; /* gutter size offset */
+  width: auto;
+}
+.masonry-column {
+  padding-left: 16px; /* gutter size */
+  background-clip: padding-box;
+}
+.masonry-item {
+  margin-bottom: 16px;
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
+  
+}
+.masonry-grid div img:hover, .masonry-grid div video:hover{
+    box-shadow: 0px 0px 15px white;
+}
 .masthead h1, .masthead .h1 {
   font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 2.5rem;
   line-height: 2.5rem;
   letter-spacing: 0.8rem;
   background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+          background-clip: text;
+}
+.masthead h1.PrunellaHeroText, .masthead .h1 .PrunellaHeroText {
+  background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0,0,0,0.15));
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
           background-clip: text;
@@ -11159,6 +11203,9 @@ body {
 }
 .about-section p {
   margin-bottom: 2rem;
+}
+.about-section p.no-pad {
+  margin-bottom: 0.5rem;
 }
 
 .projects-section {
