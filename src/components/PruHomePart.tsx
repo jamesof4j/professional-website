@@ -17,7 +17,7 @@ function PruHomePart() {
         </div>
       </header>
       <img
-        src="../assets/img/bg-prunella.jpg"
+        src="https://www.jamesdybisz.com/bg-prunella.jpg"
         alt=""
         style={{ display: "none" }}
       />
