@@ -31,7 +31,9 @@ function PruAboutPart() {
               Rest in peace, dear Prunella. You will be deeply missed but never
               forgotten.
             </p>
-            <p className="text-white-50">With all our love~ James & Lily</p>
+            <p className="text-white-50">
+              With all our love~ James, Lily, Juniper & Bennie
+            </p>
           </div>
           <i className="fa fa-cat fa-2x mb-2 mx-2 text-white"></i>
         </div>
